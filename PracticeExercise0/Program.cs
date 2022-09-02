@@ -1,33 +1,32 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 
 namespace PracticeExcercise0
 {
     public class Program
     {
-
         static void Main(string[] args)
         {
-            //Console.WriteLine(IsPalindrome("mom "));
-            //Console.WriteLine(IsPalindrome("Mom"));
+            Console.WriteLine(IsPalindrome("mom "));
+            Console.WriteLine(IsPalindrome("Mom"));
             Console.WriteLine(IsPalindrome("Race car"));
             Console.WriteLine(IsPalindrome("A nut for a jar of tuna"));
 
-            //Console.WriteLine(Reverse("coffee"));
-            //Console.WriteLine(Reverse("abcdefghijklmnopqrstuvwxyz"));
-            //Console.WriteLine(Reverse("Dad"));
-            //Console.WriteLine(Reverse(""));
-            //Console.WriteLine(Reverse("savannaH"));
+            Console.WriteLine(Reverse("coffee"));
+            Console.WriteLine(Reverse("abcdefghijklmnopqrstuvwxyz"));
+            Console.WriteLine(Reverse("Dad"));
+            Console.WriteLine(Reverse(""));
+            Console.WriteLine(Reverse("savannaH"));
 
-            Console.WriteLine(ReverseInt(369)); // 963
-            Console.WriteLine(ReverseInt(-369)); // -963
+            Console.WriteLine(ReverseInt(-369));
 
-
-            //Console.WriteLine(IsUnique("mom"));
-            //IsUnique("");
-            //IsUnique("mom");
-            //IsUnique("Robbie");
-            //IsUnique("Judah");
+            Console.WriteLine(IsUnique("mom"));
+            IsUnique("");
+            IsUnique("mom");
+            IsUnique("Robbie");
+            IsUnique("Judah");
 
             Console.WriteLine(IsNeilNumber(99999));
 
@@ -37,16 +36,33 @@ namespace PracticeExcercise0
         // #1
         public static bool IsPalindrome(string s)
         {
-            return true;
-        }
+            // clean up the string; remove spaces and lowercase all capital letters
+            // reverse the clean string
+            string cleanString = s.ToLower().Replace(" ", "");
 
-            return true;
+            // check if reverse string is the same as the clean string
+            string reversed = Reverse(cleanString);
+
+            // check if reverse string is the same as the clean string
+            if (reversed == cleanString)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         private static string Reverse(string s)
         {
             string result = "";
-            
+
+            foreach (char c in s)
+            {
+                result = result.Insert(0, c.ToString());
+            }
+
 
             return result;
         }
@@ -54,13 +70,66 @@ namespace PracticeExcercise0
         // #2 
         public static int ReverseInt(int i)
         {
-            return 0;
+            // Another variable is created to prevent the variable "i" from being changed
+            int j = 0;
+
+            // Removes negative sign from any inputted negative number
+            if (i < 0)
+            {
+                j = -1 * i;
+            }
+            else
+            {
+                j = i;
+            }
+
+            string stringNumber = j.ToString();
+
+            // Makes string into array
+            char[] arrayNumber = stringNumber.ToCharArray();
+
+            // Creates empty string for later returning
+            string reversedStringNumber = String.Empty;
+
+            // Iterates through arrayNumber backwards
+            for (int number = arrayNumber.Length - 1; number > -1; number--)
+            {
+
+                // Append each character to the reversedstring.
+                reversedStringNumber += arrayNumber[number];
+            }
+
+            int reversedIntNumber = int.Parse(reversedStringNumber);
+
+            // Puts inputted negative number's negative sign back
+            if (i < 0)
+            {
+                reversedIntNumber = reversedIntNumber * -1;
+            }
+
+            // Return the reversed string.
+            return reversedIntNumber;
         }
 
         // #3
         public static bool IsUnique(string s)
         {
-            
+            string cleanString = s.ToLower().Replace(" ", "");
+
+            for (int i = 0; i < cleanString.Length; i++)
+            {
+                // compare cleanString[i] to every subsequent letter
+                // in cleanString
+
+                for (int j = i + 1; j < cleanString.Length; j++)
+                {
+                    if (cleanString[i] == cleanString[j])
+                    {
+                        return false;
+                    }
+                }
+            }
+
             return true;
         }
 
@@ -102,7 +171,7 @@ namespace PracticeExcercise0
             {
                 return false;
             }
-            
+
         }
 
     }
