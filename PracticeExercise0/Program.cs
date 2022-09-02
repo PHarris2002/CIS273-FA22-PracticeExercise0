@@ -95,7 +95,7 @@ namespace PracticeExcercise0
             for (int number = arrayNumber.Length - 1; number > -1; number--)
             {
 
-                // Append each character to the reversedstring.
+                // Append each character to the reversed string.
                 reversedStringNumber += arrayNumber[number];
             }
 
@@ -107,7 +107,7 @@ namespace PracticeExcercise0
                 reversedIntNumber = reversedIntNumber * -1;
             }
 
-            // Return the reversed string.
+            // Return the reversed integer.
             return reversedIntNumber;
         }
 
